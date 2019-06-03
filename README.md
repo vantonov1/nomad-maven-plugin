@@ -12,15 +12,23 @@ Variable         | Default value         | Description
 NOMAD_ADDR       | http://127.0.0.1:4646 | URL of the Nomad HTTP API
 NOMAD_REGION     |                       | Nomad region  
 NOMAD_NAMESPACE  | default               | Job namespace
-NOMAD_CA_CERT    |                       | Path to TLS Authority certificate file (see https://www.nomadproject.io/guides/security/securing-nomad.html) 
+NOMAD_CA_CERT    |                       | Path to [TLS](https://www.nomadproject.io/guides/security/securing-nomad.html)  Authority certificate file  
 NOMAD_CLIENT_CERT|                       | Path to client certificate file
 NOMAD_CLIENT_KEY |                       | Path to client key file
-NOMAD_TOKEN      |                       | HTTP API token (see https://www.nomadproject.io/guides/security/acl.html)
+NOMAD_TOKEN      |                       | [HTTP API token](https://www.nomadproject.io/guides/security/acl.html)
   
 Additionally, you can set these parameters in the `configuration` block:
 
 Variable         | Default value         | Description
 -----------------|-----------------------|-----------------------------------------------
-addr             | from NOMAD_ADDR       | Override of API address
+addr             | from NOMAD_ADDR       | Overrides API address
 options          |                       | Java options, passed to nomad java driver to start the job
 datacenters      | dc1                   | List of data centers, divided by comma
+
+Dynamic port with label "http" will be allocated, Nomad provides environment parameters to [setup networking](https://www.nomadproject.io/docs/job-specification/network.html#port-parameters) 
+
+Variable         | Description
+-----------------|-----------------------------------------------
+NOMAD_IP_http    | The IP to bind on
+NOMAD_PORT_http  | The port value
+NOMAD_ADDR_http  | A combined ip:port that can be used for convenience
