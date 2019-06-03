@@ -3,10 +3,7 @@ package com.github.vantonov1;
 
 import com.github.vantonov1.maven.metadata.Metadata;
 import com.github.vantonov1.maven.metadata.Snapshot;
-import com.hashicorp.nomad.apimodel.Job;
-import com.hashicorp.nomad.apimodel.Task;
-import com.hashicorp.nomad.apimodel.TaskArtifact;
-import com.hashicorp.nomad.apimodel.TaskGroup;
+import com.hashicorp.nomad.apimodel.*;
 import com.hashicorp.nomad.javasdk.NomadApiClient;
 import com.hashicorp.nomad.javasdk.NomadApiConfiguration;
 import org.apache.maven.plugin.AbstractMojo;
@@ -63,21 +60,17 @@ public class NomadMojo extends AbstractMojo {
     }
 
     private Job createJob(String jarUrl, String jarName) {
-        final Job job = new Job();
-        job.setId(artifactId);
-        job.setDatacenters(datacenters);
-        final TaskGroup group = new TaskGroup();
-        group.setName(artifactId);
-        final Task task = new Task();
-        task.setName(artifactId);
-        task.setDriver("java");
-        task.setConfig(Map.of("jvm_options", options, "jar_path", "local/" + jarName));
-        final TaskArtifact artifact = new TaskArtifact();
-        artifact.setGetterSource(jarUrl);
-        task.setArtifacts(List.of(artifact));
-        group.addTasks(task);
-        job.setTaskGroups(List.of(group));
-        return job;
+        return new Job()
+                .setId(artifactId)
+                .setDatacenters(datacenters)
+                .setTaskGroups(List.of(new TaskGroup()
+                        .setName(artifactId)
+                        .addTasks(new Task()
+                                .setName(artifactId)
+                                .setDriver("java")
+                                .setConfig(Map.of("jvm_options", options, "jar_path", "local/" + jarName))
+                                .setResources(new Resources().setNetworks(List.of(new NetworkResource().addDynamicPorts(new Port().setLabel("http")))))
+                                .setArtifacts(List.of(new TaskArtifact().setGetterSource(jarUrl))))));
     }
 
     private String getJarNameFromMetadata() throws JAXBException, MalformedURLException {
