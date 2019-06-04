@@ -37,7 +37,6 @@
         <url>https://github.com/vantonov1/nomad-maven-plugin</url>
         <connection>scm:git:git@github.com:vantonov1/nomad-maven-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:vantonov1/nomad-maven-plugin.git</developerConnection>
-        <tag>nomad-maven-plugin-1.0</tag>
     </scm>
 
     <distributionManagement>
