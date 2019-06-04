@@ -33,6 +33,12 @@ public class NomadMojo extends AbstractMojo {
     @Parameter(property = "deploy.port", defaultValue = "http")
     private String port;
 
+    @Parameter(property = "deploy.env")
+    private Map<String, String> env;
+
+    @Parameter(property = "deploy.meta")
+    private Map<String, String> meta;
+
     @Parameter(name = "downloadUrl", defaultValue = "${project.distributionManagement.downloadUrl}", readonly = true)
     private String downloadUrl;
 
@@ -71,6 +77,8 @@ public class NomadMojo extends AbstractMojo {
                         .addTasks(new Task()
                                 .setName(artifactId)
                                 .setDriver("java")
+								.setEnv(env)
+                                .setMeta(meta)
                                 .setConfig(Map.of("jvm_options", options, "jar_path", "local/" + jarName))
                                 .setResources(new Resources().setNetworks(List.of(new NetworkResource().addDynamicPorts(new Port().setLabel(port)))))
                                 .setArtifacts(List.of(new TaskArtifact().setGetterSource(jarUrl))))));
