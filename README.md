@@ -24,11 +24,4 @@ Variable         | Default value         | Description
 addr             | from NOMAD_ADDR       | Overrides API address
 options          |                       | Java options, passed to nomad java driver to start the job
 datacenters      | dc1                   | List of data centers, divided by comma
-
-Dynamic port with label "http" will be allocated, Nomad provides environment parameters to [setup networking](https://www.nomadproject.io/docs/job-specification/network.html#port-parameters) 
-
-Variable         | Description
------------------|-----------------------------------------------
-NOMAD_IP_http    | The IP to bind on
-NOMAD_PORT_http  | The port value
-NOMAD_ADDR_http  | A combined ip:port that can be used for convenience
+port             | http                  | Label for the [dynamic port allocation](https://www.nomadproject.io/docs/job-specification/network.html#dynamic-ports) 
