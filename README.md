@@ -34,7 +34,7 @@ Configuration example:
             <plugin>
                 <groupId>com.github.vantonov1</groupId>
                 <artifactId>nomad-maven-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0</version>
                 <configuration>
                     <addr>http://nomad.local:4646</addr>
                     <datacenters>west,east</datacenters>
