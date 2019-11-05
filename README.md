@@ -40,9 +40,6 @@ Configuration example:
                     <datacenters>west,east</datacenters>
                     <options>-Xmx1G</options>
                     <port>web</port>
-                    <env>
-                        <DB.ADDRESS>localhost:3389</DB.ADDRESS>
-                    </env>
                     <meta>
                         <k1>v1</k1>
                     </meta>
