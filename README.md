@@ -1,4 +1,4 @@
-Usage: `nomad:deploy`. Plugin is *not* bound to any lifecycle phase by default (rather it is expected to be used as a part of release process), but it could be bind as usual, using `<execution>` block 
+Usage: `nomad:deploy`. Plugin is *not* bound to any lifecycle phase by default (rather it is expected to be used as a part of release process), but it could be bound as usual, using `<execution>` block 
 
 Nomad needs artifact to be downloaded from some repository, it could not be deployed right from the target folder. 
 Therefore, artifact is expected to be deployed to the repository first, and project `distributionManagement.downloadUrl` have to be set.
